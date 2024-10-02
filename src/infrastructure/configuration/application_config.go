@@ -2,9 +2,9 @@ package configuration
 
 import (
 	"apiblog/src/external/routes"
+	"apiblog/src/infrastructure/commons/logger"
 	"apiblog/src/infrastructure/database"
 	"apiblog/src/infrastructure/interceptor"
-	"apiblog/src/infrastructure/logger"
 	"fmt"
 	"log"
 	"log/slog"
@@ -59,9 +59,6 @@ func loadServer() {
 }
 
 func loadDatabase() {
-	if erro := godotenv.Load(); erro != nil {
-		panic("Error ao carregar as variáveis de ambiente!")
-	}
 	db_name, _ := os.LookupEnv("DATABASE_NAME")
 	db_host := os.Getenv("DATABASE_HOST")
 	db_port := os.Getenv("DATABASE_PORT")
@@ -69,5 +66,9 @@ func loadDatabase() {
 	db_password := os.Getenv("DATABASE_PASSWORD")
 
 	database.SetDatabaseEnv(db_name, db_host, db_port, db_user, db_password)
-	database.Conectar()
+	if _, erro := database.Conectar(); erro != nil {
+		panic("Não foi possivel conectar-se com o banco de dados")
+	}
+
+	log.Println("Conexão com Banco de dados Estabelecida")
 }

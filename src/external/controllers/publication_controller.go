@@ -5,10 +5,10 @@ import (
 	"apiblog/src/application/mappers"
 	"apiblog/src/domain/services"
 	servicesImpl "apiblog/src/domain/services/impl"
-	"apiblog/src/infrastructure/patterns"
+	"apiblog/src/infrastructure/commons/models/page"
+	"apiblog/src/infrastructure/commons/models/patterns"
 	"apiblog/src/infrastructure/request"
 	"apiblog/src/infrastructure/response"
-	"fmt"
 	"net/http"
 	"time"
 )
@@ -34,14 +34,34 @@ func InsertNewPublications(w http.ResponseWriter, r *http.Request) {
 	service = servicesImpl.NewPublicationService()
 
 	if erro := service.InsertNewPublications(publication); erro != nil {
-		response.Erro(w, http.StatusInternalServerError, erro)
+		response.Response(w, http.StatusInternalServerError, nil, erro)
 		return
 	}
 
-	response.JSON(w, http.StatusOK, "Publicação registrada")
+	response.Response(w, http.StatusCreated, "Publicação registrada com Sucesso!", nil)
 
 }
 
 func ListPublications(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Nova publicação cadastrada")
+
+	autor := r.URL.Query().Get("autor")
+	order := r.URL.Query().Get("order")
+	pageIndex := r.URL.Query().Get("pageIndex")
+	pageSize := r.URL.Query().Get("pageSize")
+
+	service = servicesImpl.NewPublicationService()
+
+	pagination := page.Pagination{
+		PageIndex: pageIndex,
+		PageSize:  pageSize,
+	}
+
+	publications, erro := service.ListPublications(autor, order, pagination)
+
+	if erro != nil {
+		response.Response(w, http.StatusInternalServerError, nil, erro)
+		return
+	}
+
+	response.Response(w, http.StatusOK, mapper.ToSlicePublicationsDto(publications), erro)
 }

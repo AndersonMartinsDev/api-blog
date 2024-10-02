@@ -2,7 +2,7 @@ package routes
 
 import (
 	"apiblog/src/external/controllers"
-	model "apiblog/src/infrastructure/routes"
+	model "apiblog/src/infrastructure/commons/models/routes"
 	"net/http"
 )
 
@@ -16,8 +16,8 @@ var PublicationRoutes = []model.RouteModel{
 		Func:         controllers.InsertNewPublications,
 	},
 	{
-		URI:          requestMapping + "/list",
-		Metodo:       http.MethodPost,
+		URI:          requestMapping,
+		Metodo:       http.MethodGet,
 		Autenticacao: false,
 		Func:         controllers.ListPublications,
 	},

@@ -22,3 +22,12 @@ func Conectar() (*sql.DB, error) {
 	}
 	return db, nil
 }
+
+func GetConnectionDatabase() *sql.DB {
+	banco, erro := Conectar()
+
+	if erro != nil {
+		panic("Conexão Não estabelecida com o Banco de dados!")
+	}
+	return banco
+}

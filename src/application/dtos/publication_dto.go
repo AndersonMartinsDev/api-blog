@@ -1,12 +1,12 @@
 package dto
 
 import (
-	date "apiblog/src/infrastructure/patterns"
+	"apiblog/src/infrastructure/commons/models/patterns"
 )
 
 type PublicationDto struct {
-	Title     string    `json:"title"`
-	Content   string    `json:"content"`
-	Autor     string    `json:"autor"`
-	OnAirDate date.Date `json:"onAirDate"`
+	Title     string        `json:"titulo"`
+	Content   string        `json:"conteudo"`
+	Autor     string        `json:"autor"`
+	OnAirDate patterns.Date `json:"dataPublicacao"`
 }

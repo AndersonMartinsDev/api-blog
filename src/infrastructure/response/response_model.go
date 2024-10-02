@@ -1,6 +1,6 @@
 package response
 
 type ResponseModel struct {
-	Entity     interface{}
-	StatusHttp int
+	Object     interface{} `json:"data"`
+	StatusHttp int         `json:"status"`
 }
