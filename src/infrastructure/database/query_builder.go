@@ -10,7 +10,7 @@ type SQLBuild struct {
 }
 
 func (query SQLBuild) Insert(table string, v any) string {
-	columns, valuesCount := query.columnsAndValuesCount(v)
+	columns, valuesCount := query.columnsAndValuesCountToInsert(v)
 	return fmt.Sprintf(`INSERT INTO %s(%s) VALUES(%s)`, table, columns, valuesCount)
 }
 
@@ -41,6 +41,31 @@ func (query SQLBuild) columnsAndValuesCount(v any) (string, string) {
 		fieldValue := fields.Type().Field(i).Tag
 		valor := fieldValue.Get("column")
 		if valor != "" {
+			selecto = selecto + valor
+			count = count + "$" + strconv.Itoa(i+1)
+
+			if i != declaredFieldsSize-1 {
+				selecto = selecto + ", "
+				count = count + ", "
+			}
+
+		}
+
+	}
+	return selecto, count
+}
+
+func (query SQLBuild) columnsAndValuesCountToInsert(v any) (string, string) {
+	fields := reflect.ValueOf(v)
+	selecto := ""
+	count := ""
+	declaredFieldsSize := fields.NumField()
+
+	for i := 0; i < declaredFieldsSize; i++ {
+		fieldValue := fields.Type().Field(i).Tag
+		valor := fieldValue.Get("column")
+
+		if valor != "" && valor != "id" {
 			selecto = selecto + valor
 			count = count + "$" + strconv.Itoa(i)
 

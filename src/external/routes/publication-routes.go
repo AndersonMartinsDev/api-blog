@@ -21,4 +21,22 @@ var PublicationRoutes = []model.RouteModel{
 		Autenticacao: false,
 		Func:         controllers.ListPublications,
 	},
+	{
+		URI:          requestMapping + "/{title}/{autor}",
+		Metodo:       http.MethodGet,
+		Autenticacao: false,
+		Func:         controllers.GetPublicationByTitleAndAutor,
+	},
+	{
+		URI:          requestMapping,
+		Metodo:       http.MethodPut,
+		Autenticacao: false,
+		Func:         controllers.UpdatePublication,
+	},
+	{
+		URI:          requestMapping + "/{title}/{autor}",
+		Metodo:       http.MethodDelete,
+		Autenticacao: false,
+		Func:         controllers.DeletePublicationByTitleAndAutor,
+	},
 }

@@ -5,7 +5,7 @@ import (
 )
 
 type Publication struct {
-	Id        uint
+	Id        uint          `column:"id"`
 	Title     string        `column:"title"`
 	Content   string        `column:"content"`
 	Autor     string        `column:"autor"`
