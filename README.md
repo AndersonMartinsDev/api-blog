@@ -37,18 +37,22 @@ Esta API RESTful em Go foi desenvolvida para fornecer os dados necessários para
 
 ## Execução
 
-1. **Construir o Docker image (opcional)**
+1. **Iniciar serviços usando Docker Compose (opcional)**
     ```bash
-     docker build -t sua-imagem .
-    ```
-2. **Iniciar o container**
-    ```bash
-     docker run -p 8080:8080 sua-imagem
+     docker-compose up --build
     ```
 3. **Executar diretamente (sem Docker)**
     ```bash
      go run main.go
     ```
+
+## Testes 
+
+ **Para executar os testes execute os comandos abaixo**    
+
+        go test  .\... -v -coverprofile coverage.out .\test\
+        go tool cover -html coverage.out -o coverage.html
+    
 
 ## Endpoints API 
 

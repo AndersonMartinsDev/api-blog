@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  api:
+    build: 
+      dockerfile: DockerFile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - APPLICATION_NAME=API_BLOG
+      - DATABASE_NAME=apiblog
+      - DATABASE_HOST=172.19.0.2
+      - DATABASE_PORT=5432
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=1234
+  db:
+    ports:
+      - "5432:5432"
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=apiblog

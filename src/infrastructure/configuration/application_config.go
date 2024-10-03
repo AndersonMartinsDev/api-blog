@@ -71,4 +71,6 @@ func loadDatabase() {
 	}
 
 	log.Println("Conexão com Banco de dados Estabelecida")
+
+	database.InitalStrucuture()
 }

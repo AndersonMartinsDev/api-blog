@@ -3,7 +3,11 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"log"
 
+	"github.com/golang-migrate/migrate/v4"
+	"github.com/golang-migrate/migrate/v4/database/postgres"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 	_ "github.com/lib/pq" //Driver
 )
 
@@ -30,4 +34,38 @@ func GetConnectionDatabase() *sql.DB {
 		panic("Conexão Não estabelecida com o Banco de dados!")
 	}
 	return banco
+}
+
+func InitalStrucuture() {
+	banco, erro := Conectar()
+	if erro != nil {
+		panic("Problema ao criar tabelas")
+	}
+
+	banco.Exec("CREATE DATABASE apiblog")
+
+	config := &postgres.Config{SchemaName: "public"}
+	driver, err := postgres.WithInstance(banco, config)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Print(config.DatabaseName)
+
+	m, err := migrate.NewWithDatabaseInstance(
+		"file://migrations",
+		config.DatabaseName,
+		driver,
+	)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if err := m.Up(); err != nil && err != migrate.ErrNoChange {
+		log.Fatal(err)
+	}
+
+	defer banco.Close()
 }
