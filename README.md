@@ -1,6 +1,10 @@
 Markdown
 # Projeto: API de Blog (Go)
 
+![Static Badge](https://img.shields.io/badge/stack-golang-blue)
+![Static Badge](https://img.shields.io/badge/autor-Anderson-green)
+
+
 ## Descrição
 Esta API RESTful em Go foi desenvolvida para fornecer os dados necessários para um blog, como publicações e seus respectivos autores. A API utiliza o banco de dados PostgreSQL para persistir as informações.
 

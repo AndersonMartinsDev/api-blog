@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "40acd002-ed99-46db-af1b-85c32e1b41ab",
+		"name": "Serasa Blog Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8356863"
+	},
+	"item": [
+		{
+			"name": "New Publications",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\":\"Como demonstrar um pagode usando Batatas 2\",\r\n    \"conteudo\":\"Conteudo vegano e musical que deve brilhar e aterrorizar o seu coração\",\r\n    \"autor\":\"Novos Modelos\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/publication/insert",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"publication",
+						"insert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Publications",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\":\"Como demonstrar um pagode usando Batatas 2\",\r\n    \"conteudo\":\"Conteudo vegano e musical que deve brilhar e aterrorizar o seu coração\",\r\n    \"autor\":\"Novos Modelos\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/publication",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"publication"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Publications",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/publication",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"publication"
+					],
+					"query": [
+						{
+							"key": "autor",
+							"value": "Batatas Songs",
+							"disabled": true
+						},
+						{
+							"key": "order",
+							"value": "desc",
+							"disabled": true
+						},
+						{
+							"key": "pageIndex",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "pageSize",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publications por Titulo e Autor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/publication/Como demonstrar um pagode usando Batatas 3/Novos Modelos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"publication",
+						"Como demonstrar um pagode usando Batatas 3",
+						"Novos Modelos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publications por Titulo e Autor Copy",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/publication/jhkh/testador de envios de sqlbuild",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"publication",
+						"jhkh",
+						"testador de envios de sqlbuild"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
