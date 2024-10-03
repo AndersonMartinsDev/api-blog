@@ -1,4 +1,3 @@
-Markdown
 # Projeto: API de Blog (Go)
 
 ![Static Badge](https://img.shields.io/badge/stack-golang-blue)
